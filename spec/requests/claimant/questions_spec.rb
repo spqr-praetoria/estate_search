@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/claimant/questions", type: :request do
-  let(:user) { create(:user, :claimant) }
+  let!(:user) { create(:user, :claimant) }
 
   before do
     sign_in user
@@ -92,26 +92,6 @@ RSpec.describe "/claimant/questions", type: :request do
   end
 
   describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested question" do
-        question = create(:question, user: user)
-        patch claimant_question_url(question), params: { question: new_attributes }
-        question.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the question" do
-        question = create(:question, user: user)
-        patch claimant_question_url(question), params: { question: new_attributes }
-        question.reload
-        expect(response).to redirect_to(claimant_root_path)
-      end
-    end
-
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         question = create(:question, user: user)

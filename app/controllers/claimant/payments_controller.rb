@@ -2,6 +2,8 @@ class Claimant::PaymentsController < Claimant::ApplicationController
   before_action :set_payment, only: :update
 
   def update
+    authorize! :payments
+
     if ApprovePaymentService.new(@payment).call
       respond_to do |format|
         format.turbo_stream

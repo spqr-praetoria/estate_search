@@ -18,8 +18,10 @@
       <% else %>
         <%= link_to "View question", 
           claimant_question_path(question), data: { turbo_frame: "_top" }, class: "btn btn-neutral btn-outline" %>
-        <%= link_to "Edit", edit_claimant_question_path(question), data: { turbo_frame: dom_id(Question.new) }, class: "btn btn-outline btn-primary" %>
-        <%= button_to "Delete", claimant_question_path(question), method: :delete, class: "btn btn-error btn-outline" %>
+        <% if !question.closed? %>
+          <%= link_to "Edit", edit_claimant_question_path(question), data: { turbo_frame: dom_id(Question.new) }, class: "btn btn-outline btn-primary" %>
+          <%= button_to "Delete", claimant_question_path(question), method: :delete, class: "btn btn-error btn-outline" %>
+        <% end %>
       <% end %>
     </div>
   </td>

@@ -2,17 +2,21 @@ class Claimant::QuestionsController < Claimant::ApplicationController
   before_action :set_question, only: %i[ show edit update destroy ]
 
   def show
+    authorize! @question
   end
 
   def new
+    authorize! Question
     @question = Question.new
   end
 
   def edit
+    authorize! @question
   end
 
   def create
     @question = current_user.questions.new(question_params)
+    authorize! @question
 
     if @question.save
       respond_to do |format|
@@ -25,6 +29,8 @@ class Claimant::QuestionsController < Claimant::ApplicationController
   end
 
   def update
+    authorize! @question
+
     if @question.update(question_params)
       respond_to do |format|
         format.html { redirect_to claimant_root_path, notice: "Question was successfully updated.", status: :see_other }
@@ -36,6 +42,8 @@ class Claimant::QuestionsController < Claimant::ApplicationController
   end
 
   def destroy
+    authorize! @question
+
     @question.destroy!
 
     respond_to do |format|
