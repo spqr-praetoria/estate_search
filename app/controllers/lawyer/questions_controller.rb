@@ -4,6 +4,10 @@ class Lawyer::QuestionsController < Lawyer::ApplicationController
   def show
   end
 
+  def new
+    @question = Question.new
+  end
+
   private
 
   def set_question
