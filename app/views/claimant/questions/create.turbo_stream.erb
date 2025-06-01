@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend "questions-list", render(@question) %>
+<%= turbo_stream.update Question.new, "" %>

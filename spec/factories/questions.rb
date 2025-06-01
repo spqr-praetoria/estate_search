@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :question do
-    user { nil }
+    user { create(:user, :claimant) }
     title { "MyString" }
     body { "MyText" }
-    category { "MyString" }
+    category { 0 }
     status { 1 }
   end
 end

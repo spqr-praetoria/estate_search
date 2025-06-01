@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "question_#{@question.id}", render(@question) %>
+<%= turbo_stream.update Question.new, "" %>

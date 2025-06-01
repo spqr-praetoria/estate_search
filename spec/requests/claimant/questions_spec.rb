@@ -12,45 +12,61 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/questions", type: :request do
+RSpec.describe "/claimant/questions", type: :request do
+  let(:user) { create(:user, :claimant) }
+
+  before do
+    sign_in user
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Question. As you add validations to Question, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      title: "Test Question",
+      body: "Test Body",
+      category: "general",
+      status: "open"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      title: "",
+      body: "",
+      category: nil,
+      status: nil
+    }
   }
 
   describe "GET /index" do
     it "renders a successful response" do
-      Question.create! valid_attributes
-      get questions_url
+      create(:question, user: user)
+      get claimant_questions_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      question = Question.create! valid_attributes
-      get question_url(question)
+      question = create(:question, user: user)
+      get claimant_question_url(question)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_question_url
+      get new_claimant_question_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      question = Question.create! valid_attributes
-      get edit_question_url(question)
+      question = create(:question, user: user)
+      get edit_claimant_question_url(question)
       expect(response).to be_successful
     end
   end
@@ -59,25 +75,25 @@ RSpec.describe "/questions", type: :request do
     context "with valid parameters" do
       it "creates a new Question" do
         expect {
-          post questions_url, params: { question: valid_attributes }
+          post claimant_questions_url, params: { question: valid_attributes }
         }.to change(Question, :count).by(1)
       end
 
       it "redirects to the created question" do
-        post questions_url, params: { question: valid_attributes }
-        expect(response).to redirect_to(question_url(Question.last))
+        post claimant_questions_url, params: { question: valid_attributes }
+        expect(response).to redirect_to(claimant_question_url(Question.last))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Question" do
         expect {
-          post questions_url, params: { question: invalid_attributes }
+          post claimant_questions_url, params: { question: invalid_attributes }
         }.to change(Question, :count).by(0)
       end
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post questions_url, params: { question: invalid_attributes }
+        post claimant_questions_url, params: { question: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -90,24 +106,24 @@ RSpec.describe "/questions", type: :request do
       }
 
       it "updates the requested question" do
-        question = Question.create! valid_attributes
-        patch question_url(question), params: { question: new_attributes }
+        question = create(:question, user: user)
+        patch claimant_question_url(question), params: { question: new_attributes }
         question.reload
         skip("Add assertions for updated state")
       end
 
       it "redirects to the question" do
-        question = Question.create! valid_attributes
-        patch question_url(question), params: { question: new_attributes }
+        question = create(:question, user: user)
+        patch claimant_question_url(question), params: { question: new_attributes }
         question.reload
-        expect(response).to redirect_to(question_url(question))
+        expect(response).to redirect_to(claimant_question_url(question))
       end
     end
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        question = Question.create! valid_attributes
-        patch question_url(question), params: { question: invalid_attributes }
+        question = create(:question, user: user)
+        patch claimant_question_url(question), params: { question: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -115,16 +131,16 @@ RSpec.describe "/questions", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested question" do
-      question = Question.create! valid_attributes
+      question = create(:question, user: user)
       expect {
-        delete question_url(question)
+        delete claimant_question_url(question)
       }.to change(Question, :count).by(-1)
     end
 
     it "redirects to the questions list" do
-      question = Question.create! valid_attributes
-      delete question_url(question)
-      expect(response).to redirect_to(questions_url)
+      question = create(:question, user: user)
+      delete claimant_question_url(question)
+      expect(response).to redirect_to(claimant_questions_url)
     end
   end
 end
