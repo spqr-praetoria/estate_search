@@ -1,0 +1,27 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "'none'",
+  "main": "index.js",
+  "repository": "git@github.com:spqr-praetoria/playground.git",
+  "author": "Benjamin Fowl <b.fowl87@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.8",
+    "rollup": "^4.41.1",
+    "tailwindcss": "^4.1.8",
+    "vite": "^5.4.19",
+    "vite-plugin-rails": "^0.5.0",
+    "vite-plugin-ruby": "^5.1.1"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.13",
+    "@tailwindcss/cli": "^4.1.8",
+    "daisyui": "^5.0.40"
+  },
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
+    "build": "vite build --outDir public"
+  }
+}

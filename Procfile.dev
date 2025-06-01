@@ -1,0 +1,4 @@
+
+web: bin/rails s
+css: yarn build:css --watch
+vite: bin/vite dev
