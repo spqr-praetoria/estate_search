@@ -30,7 +30,9 @@
       </div>
 
       <div class="flex items-center gap-4">
-        <% if answer.unpaid? && answer.payment.pending? %>
+        <% if answer.question.closed? %>
+          <div class="badge badge-neutral">Closed</div>
+        <% elsif answer.unpaid? && answer.payment.pending? %>
           <%= button_to "Pay #{format_pounds(answer.proposed_fee)}", 
                       claimant_payment_path(answer.payment), 
                       method: :patch,

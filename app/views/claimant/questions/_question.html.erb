@@ -12,6 +12,7 @@
   </td>
   <td class="relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-6">
     <div class="flex justify-end gap-2">
+      <%= link_to "Close", claimant_question_path(question, question: { status: :closed }), data: { turbo_method: :put }, class: "btn btn-error btn-outline" %>
       <% if question.answers.present? %>
         <%= link_to "View answers", claimant_question_path(question), data: { turbo_frame: "_top"}, class: "btn btn-neutral btn-outline" %>
       <% else %>
