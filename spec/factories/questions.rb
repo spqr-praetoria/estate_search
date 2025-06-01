@@ -4,6 +4,6 @@ FactoryBot.define do
     title { "MyString" }
     body { "MyText" }
     category { 0 }
-    status { 1 }
+    status { :answered }
   end
 end

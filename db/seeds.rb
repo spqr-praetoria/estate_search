@@ -188,7 +188,7 @@ questions.each do |category, category_questions|
         lawyer: User.lawyer.sample,
         body: answer_data[:body],
         proposed_fee: answer_data[:proposed_fee],
-        status: "hidden"
+        status: "unpaid"
       )
     end
   end

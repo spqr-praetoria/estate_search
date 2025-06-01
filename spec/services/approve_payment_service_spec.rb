@@ -37,8 +37,8 @@ RSpec.describe ApprovePaymentService, type: :service do
 
     it 'returns true and updates all statuses and balances' do
       expect(subject.call).to eq(true)
-      expect(payment.reload.status).to eq('paid')
-      expect(answer.reload.status).to eq('visible')
+      expect(payment.reload.status).to eq('approved')
+      expect(answer.reload.status).to eq('paid')
       expect(question.reload.status).to eq('answered')
       expect(claimant.reload.balance).to eq(50)
       expect(lawyer.reload.balance).to eq(150)

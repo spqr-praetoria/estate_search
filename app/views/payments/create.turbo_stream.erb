@@ -1,7 +1,0 @@
-<%= turbo_stream.replace dom_id(@payment.answer) do %>
-  <%= render partial: "claimant/questions/answer", locals: { answer: @payment.answer } %>
-<% end %>
-
-<%= turbo_stream.replace "question_#{@payment.answer.question.id}_status" do %>
-  <%= render partial: "claimant/questions/question_status", locals: { question: @payment.answer.question } %>
-<% end %>

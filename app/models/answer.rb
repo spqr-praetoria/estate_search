@@ -8,7 +8,7 @@ class Answer < ApplicationRecord
   validates :proposed_fee, numericality: { greater_than: 0 }
 
   enum :status, {
-    hidden: 0,
-    visible: 1
+    unpaid: 0,
+    paid: 1
   }
 end

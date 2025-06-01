@@ -21,10 +21,10 @@
         </div>
         <% if answer.payment.present? %>
           <% case answer.payment.status %>
-          <% when 'unpaid' %>
-            <div class="badge badge-neutral">Unpaid</div>
-          <% when 'paid' %>
-            <div class="badge badge-success">Paid</div>
+          <% when 'pending' %>
+            <div class="badge badge-neutral">Pending</div>
+          <% when 'approved' %>
+            <div class="badge badge-success">Approved</div>
           <% end %>
         <% end %>
       </div>

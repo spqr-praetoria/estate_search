@@ -16,7 +16,7 @@ class ApprovePaymentService
       process_payment_transfer
     end
 
-    payment.paid? && answer.visible? && question.answered?
+    payment.approved? && answer.paid? && question.answered?
   end
 
   private
@@ -34,11 +34,11 @@ class ApprovePaymentService
   end
 
   def update_payment_status
-    payment.update!(status: :paid)
+    payment.update!(status: :approved)
   end
 
   def update_answer_status
-    answer.update!(status: :visible)
+    answer.update!(status: :paid)
   end
 
   def update_question_status

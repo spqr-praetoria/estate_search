@@ -66,7 +66,7 @@
       <%= turbo_frame_tag dom_id(answer) do %>
         <div class="card bg-base-100 shadow-lg border border-gray-300 mb-4">
           <div class="card-body">
-            <% if answer.hidden? %>
+            <% if answer.unpaid? %>
               <div class="alert alert-success shadow-lg my-4 bg-green-50">
                 <div class="flex items-center gap-4">
                   <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@
               </div>
 
               <div class="flex items-center gap-4">
-                <% if answer.hidden? && answer.payment.unpaid? %>
+                <% if answer.unpaid? && answer.payment.pending? %>
                   <%= button_to "Pay £#{answer.proposed_fee}", 
                               payment_path(answer.payment), 
                               method: :patch,
@@ -104,10 +104,10 @@
                               data: { turbo_frame: dom_id(answer) } %>
                 <% else %>
                   <% case answer.payment.status %>
-                  <% when 'unpaid' %>
-                    <div class="badge badge-neutral">Unpaid</div>
-                  <% when 'paid' %>
-                    <div class="badge badge-success">Paid</div>
+                  <% when 'pending' %>
+                    <div class="badge badge-neutral">Pending</div>
+                  <% when 'approved' %>
+                    <div class="badge badge-success">Approved</div>
                   <% end %>
                 <% end %>
               </div>
