@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.string :first_name, default: "", null: false
       t.string :last_name, default: "", null: false
 
-      # Role enum (user, laywer, admin)
+      # Role enum (member, laywer, admin)
       t.integer :role, default: 0, null: false
 
       t.timestamps null: false

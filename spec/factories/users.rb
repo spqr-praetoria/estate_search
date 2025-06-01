@@ -5,6 +5,18 @@ FactoryBot.define do
     password_confirmation { "password123" }
     first_name { "John" }
     last_name { "Doe" }
-    role { "user" }
+    role { "claimant" }
+
+    trait :claimant do
+      role { "claimant" }
+    end
+
+    trait :admin do
+      role { "admin" }
+    end
+
+    trait :lawyer do
+      role { "lawyer" }
+    end
   end
 end

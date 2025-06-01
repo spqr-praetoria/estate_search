@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   enum :role, {
-    user: 0,
+    claimant: 0,
     lawyer: 1,
     admin: 2
   }

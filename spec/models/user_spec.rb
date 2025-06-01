@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'enums' do
-    it { should define_enum_for(:role).with_values(user: 0, lawyer: 1, admin: 2) }
+    it { should define_enum_for(:role).with_values(claimant: 0, lawyer: 1, admin: 2) }
   end
 
   describe 'devise modules' do
