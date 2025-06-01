@@ -1,0 +1,29 @@
+<dl class="mx-auto mb-8 grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-2 lg:grid-cols-4 border-b border-gray-200">
+  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:px-6 xl:px-8">
+    <dt class="text-sm/6 font-medium text-gray-500">Answers</dt>
+    <dd class="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
+      <%= "# %03d" % current_user.answers.count %>
+    </dd>
+  </div>
+  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:px-6 xl:px-8">
+    <dt class="text-sm/6 font-medium text-gray-500">Total Payments</dt>
+    <dd class="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
+      <%= "# %03d" % current_user.payments.count %>
+    </dd>
+  </div>
+  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:px-6 xl:px-8">
+    <dt class="text-sm/6 font-medium text-gray-500">Paid</dt>
+    <dd class="text-xs font-medium text-green-600">
+      <%= "+#{(current_user.payments.count / 100.0) * current_user.payments.approved.count}%" %>
+    </dd>
+    <dd class="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
+      <%= "# %03d" % current_user.payments.approved.count %>
+    </dd>
+  </div>
+  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:px-6 xl:px-8">
+    <dt class="text-sm/6 font-medium text-gray-500">Total revenue</dt>
+    <dd class="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
+      <%= "£ #{current_user.payments.approved.sum(:amount)}" %>
+    </dd>
+  </div>
+</dl>

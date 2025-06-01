@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-white">
   <head>
     <title><%= content_for(:title) || "Estate Search" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -23,7 +23,17 @@
     <%= vite_javascript_tag 'application' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="h-full">
+    <div>
+      <%= render "lawyer/shared/sidebar" %>
+
+      <main class=" lg:pl-72">
+        <%= render "lawyer/shared/stats" %>
+        
+        <div class="px-4 sm:px-6 lg:px-8">
+          <%= yield %>
+        </div>
+      </main>
+    </div>
   </body>
 </html>

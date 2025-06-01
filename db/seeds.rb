@@ -222,7 +222,7 @@ Question.create(
 # 1 payment per answer
 Answer.all.each do |answer|
   Payment.create(
-    user: User.claimant.sample,
+    user: User.find(answer.lawyer_id),
     answer: answer,
     amount: answer.proposed_fee,
     status: 0
