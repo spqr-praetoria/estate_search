@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AnswersController, type: :routing do
+RSpec.describe Lawyer::AnswersController, type: :routing do
   describe "routing" do
     it "routes to #index" do
       expect(get: "/answers").to route_to("answers#index")
