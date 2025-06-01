@@ -1,12 +1,16 @@
-class Lawyer::AnswerController < Lawyer::ApplicationController
+class Lawyer::AnswersController < Lawyer::ApplicationController
   before_action :set_question, only: %i[ new create ]
-  before_action :set_answer, only: %i[ show edit update destroy ]
+  before_action :set_answer, only: %i[ show ]
+
+  def show
+    @title = "Your Answer"
+  end
 
   def new
+    @answer = Answer.new
   end
 
   def create
-    @question = Question.find(params[:question_id])
     @answer = @question.answers.create(answer_params)
     redirect_to lawyer_question_path(@question)
   end

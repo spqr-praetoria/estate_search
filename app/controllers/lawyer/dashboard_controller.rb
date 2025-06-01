@@ -5,6 +5,6 @@ class Lawyer::DashboardController < Lawyer::ApplicationController
 
     # Query: Can a lawyer submit multiple answers to the same question
     # I've made it so that it's 1 question per lawyer
-    @questions = Question.not_closed.not_answered_by(current_user).order(created_at: :desc)
+    @questions = Question.not_closed.order(created_at: :desc)
   end
 end

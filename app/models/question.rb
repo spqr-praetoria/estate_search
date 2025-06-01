@@ -4,11 +4,6 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
 
   scope :not_closed, -> { where.not(status: :closed) }
-  scope :not_answered_by, ->(lawyer) {
-    left_joins(:answers)
-      .where("answers.lawyer_id IS NULL OR answers.lawyer_id != ?", lawyer.id)
-      .distinct
-  }
 
   validates :title, :body, presence: true
   validates :status, inclusion: { in: %w[open answered closed] }
@@ -43,4 +38,8 @@ class Question < ApplicationRecord
     answered: 1,
     closed: 2
   }
+
+  def answered_by?(lawyer)
+    answers.exists?(lawyer: lawyer)
+  end
 end
