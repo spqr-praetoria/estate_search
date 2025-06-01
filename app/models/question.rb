@@ -5,6 +5,8 @@ class Question < ApplicationRecord
 
   validates :title, :body, presence: true
 
+  has_rich_text :body
+
   enum :category, {
     general: 0,
     missing_assets: 1,

@@ -28,8 +28,8 @@
       </div>
     </div>
     <div>
-      <%= form.label :body, class: "block text-sm font-medium text-gray-900" %>
-      <%= form.text_area :body, class: "textarea textarea-bordered w-full" %>
+      <%= form.label :body %>
+      <%= form.rich_textarea :body %>
     </div>
     <div class="flex gap-2 w-full md:hidden">
       <%= form.submit nil, class: "btn btn-primary w-full" %>
