@@ -41,3 +41,4 @@ node_modules
 *.local
 
 *.mdc
+app/assets/builds/
