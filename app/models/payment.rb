@@ -6,8 +6,6 @@ class Payment < ApplicationRecord
 
   enum :status, {
     unpaid: 0,
-    pending: 1,
-    approved: 2,
-    rejected: 3
+    paid: 1
   }
 end

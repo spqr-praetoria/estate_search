@@ -23,8 +23,11 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(payment_params)
 
-    if @payment.save
-      redirect_to @payment, notice: "Payment was successfully created."
+    if ApprovePaymentService.new(@payment.answer).call
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @payment, notice: "Payment was successfully created." }
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,8 +35,11 @@ class PaymentsController < ApplicationController
 
   # PATCH/PUT /payments/1
   def update
-    if @payment.update(payment_params)
-      redirect_to @payment, notice: "Payment was successfully updated.", status: :see_other
+    if ApprovePaymentService.new(@payment).call
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @payment, notice: "Payment was successfully updated.", status: :see_other }
+      end
     else
       render :edit, status: :unprocessable_entity
     end

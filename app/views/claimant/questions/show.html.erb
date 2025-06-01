@@ -2,7 +2,13 @@
 
 <div class="sm:flex sm:items-center">
   <div class="sm:flex-auto">
-    <p class="mt-2 text-sm text-gray-700">Your question and answers. </p>
+    <p class="mt-2 text-sm text-gray-700">Your question and answers.</p>
+    <div class="flex items-center gap-2 mt-2">
+      <span class="text-sm font-medium text-gray-600">Balance:</span>
+      <span class="inline-flex items-center rounded bg-green-100 px-2 py-0.5 text-sm font-semibold text-green-800">
+        £<%= number_with_precision(current_user.balance, precision: 2) %>
+      </span>
+    </div>
   </div>
   <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
     <%= link_to "Back to questions",
@@ -12,7 +18,6 @@
   </div>
 </div>
 <div class="mx-auto mt-8">
-  <%# Question Card %>
   <div class="card bg-base-100 shadow-xl mb-8 border border-gray-300">
     <div class="card-body">
       <div class="flex justify-between items-start mb-4">
@@ -34,17 +39,9 @@
           
           <div class="divider divider-horizontal"></div>
           
-          <div class="flex items-center gap-2">
-            <span class="text-sm font-medium text-gray-600">Status:</span>
-            <% case @question.status %>
-            <% when 'open' %>
-              <div class="badge badge-success badge-lg">Open for Answers</div>
-            <% when 'answered' %>
-              <div class="badge badge-info badge-lg">Has Answers</div>
-            <% when 'closed' %>
-              <div class="badge badge-neutral badge-lg">Closed</div>
-            <% end %>
-          </div>
+          <%= turbo_frame_tag "question_#{@question.id}_status" do %>
+            <%= render partial: "claimant/questions/question_status", locals: { question: @question } %>
+          <% end %>
         </div>
       </div>
 
@@ -66,56 +63,58 @@
     </h3>
 
     <% @question.answers.each do |answer| %>
-      <div class="card bg-base-100 shadow-lg border border-gray-300" id="<%= dom_id(answer) %>">
-        <div class="card-body">
-          <div class="prose max-w-none mb-4">
-            <%= answer.body %>
-          </div>
+      <%= turbo_frame_tag dom_id(answer) do %>
+        <div class="card bg-base-100 shadow-lg border border-gray-300 mb-4">
+          <div class="card-body">
+            <% if answer.hidden? %>
+              <div class="alert alert-success shadow-lg my-4 bg-green-50">
+                <div class="flex items-center gap-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <div>
+                    <h3 class="font-bold text-lg text-green-800">Payment Required</h3>
+                    <div class="text-base text-green-700">To view this answer, please pay £<span class="font-bold text-lg"><%= answer.proposed_fee %></span></div>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <div class="prose max-w-none mb-4">
+                <%= answer.body %>
+              </div>
+            <% end %>
 
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-4">
-              <div class="text-sm">
-                <span class="font-medium">Answered by:</span>
-                <%= answer.lawyer.first_name %> <%= answer.lawyer.last_name %>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-4">
+                <div class="text-sm">
+                  <span class="font-medium">Answered by:</span>
+                  <%= answer.lawyer.first_name %> <%= answer.lawyer.last_name %>
+                </div>
+                <div class="text-sm text-gray-500">
+                  <%= answer.created_at.strftime("%B %d, %Y") %>
+                </div>
               </div>
-              <div class="text-sm text-gray-500">
-                <%= answer.created_at.strftime("%B %d, %Y") %>
-              </div>
-            </div>
 
-            <div class="flex items-center gap-4">
-              <div class="text-lg font-semibold">
-                £<%= answer.proposed_fee %>
-              </div>
-              <% if answer.payment.unpaid? %>
-                <% case answer.payment.status %>
-                <% when 'pending' %>
-                  <div class="badge badge-warning">Payment Pending</div>
-                <% when 'approved' %>
-                  <div class="badge badge-success">Paid</div>
-                <% when 'rejected' %>
-                  <div class="badge badge-error">Rejected</div>
-                <% end %>
-              <% else %>
-                <%= button_to "Pay £#{answer.proposed_fee}", 
-                              payments_path, 
-                              params: { 
-                                payment: { 
-                                  answer_id: answer.id,
-                                  amount: answer.proposed_fee,
-                                  user_id: current_user.id,
-                                  status: 'pending'
-                                }
-                              },
+              <div class="flex items-center gap-4">
+                <% if answer.hidden? && answer.payment.unpaid? %>
+                  <%= button_to "Pay £#{answer.proposed_fee}", 
+                              payment_path(answer.payment), 
+                              method: :patch,
                               class: "btn btn-primary btn-sm",
-                              data: { 
-                                turbo_confirm: "Are you sure you want to pay £#{answer.proposed_fee} for this answer?" 
-                              } %>
-              <% end %>
+                              data: { turbo_frame: dom_id(answer) } %>
+                <% else %>
+                  <% case answer.payment.status %>
+                  <% when 'unpaid' %>
+                    <div class="badge badge-neutral">Unpaid</div>
+                  <% when 'paid' %>
+                    <div class="badge badge-success">Paid</div>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

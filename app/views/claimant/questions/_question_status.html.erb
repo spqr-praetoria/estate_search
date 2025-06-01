@@ -1,0 +1,11 @@
+<div class="flex items-center gap-2">
+  <span class="text-sm font-medium text-gray-600">Status:</span>
+  <% case question.status %>
+  <% when 'open' %>
+    <div class="badge badge-success badge-lg">Open</div>
+  <% when 'answered' %>
+    <div class="badge badge-warning badge-lg">Answered</div>
+  <% when 'closed' %>
+    <div class="badge badge-neutral badge-lg">Closed</div>
+  <% end %>
+</div>

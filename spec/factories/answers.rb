@@ -4,6 +4,6 @@ FactoryBot.define do
     lawyer { nil }
     body { "MyText" }
     proposed_fee { 1 }
-    is_paid { false }
+    status { :hidden }
   end
 end

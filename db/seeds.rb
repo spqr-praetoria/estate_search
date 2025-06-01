@@ -4,7 +4,8 @@ User.create(
   password: "password",
   first_name: "User",
   last_name: "User",
-  role: :claimant
+  role: :claimant,
+  balance: 100000
 )
 
 User.create(
@@ -12,7 +13,8 @@ User.create(
   password: "password",
   first_name: "User",
   last_name: "User",
-  role: :claimant
+  role: :claimant,
+  balance: 100000
 )
 
 # Admin user
@@ -44,7 +46,8 @@ lawyer_names.each_with_index do |lawyer, index|
     password: "password",
     first_name: lawyer[:first_name],
     last_name: lawyer[:last_name],
-    role: :lawyer
+    role: :lawyer,
+    balance: 0
   )
 end
 
@@ -185,7 +188,7 @@ questions.each do |category, category_questions|
         lawyer: User.lawyer.sample,
         body: answer_data[:body],
         proposed_fee: answer_data[:proposed_fee],
-        status: "unpaid"
+        status: "hidden"
       )
     end
   end
