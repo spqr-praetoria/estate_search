@@ -2,10 +2,6 @@ class Lawyer::AnswersController < Lawyer::ApplicationController
   before_action :set_question, only: :new
   before_action :set_answer, only: :show
 
-  def index
-    @answers = current_user.answers.includes(:question).order(created_at: :desc)
-  end
-
   def show
     @title = "Your Answer"
   end

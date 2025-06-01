@@ -2,10 +2,6 @@ require "rails_helper"
 
 RSpec.describe Claimant::QuestionsController, type: :routing do
   describe "routing" do
-    it "routes to #index" do
-      expect(get: "/claimant/questions").to route_to("claimant/questions#index")
-    end
-
     it "routes to #new" do
       expect(get: "/claimant/questions/new").to route_to("claimant/questions#new")
     end

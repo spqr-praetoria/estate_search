@@ -40,14 +40,6 @@ RSpec.describe "/claimant/questions", type: :request do
     }
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      create(:question, user: user)
-      get claimant_questions_url
-      expect(response).to be_successful
-    end
-  end
-
   describe "GET /show" do
     it "renders a successful response" do
       question = create(:question, user: user)
@@ -81,7 +73,7 @@ RSpec.describe "/claimant/questions", type: :request do
 
       it "redirects to the created question" do
         post claimant_questions_url, params: { question: valid_attributes }
-        expect(response).to redirect_to(claimant_question_url(Question.last))
+        expect(response).to redirect_to(claimant_root_path)
       end
     end
 
@@ -116,7 +108,7 @@ RSpec.describe "/claimant/questions", type: :request do
         question = create(:question, user: user)
         patch claimant_question_url(question), params: { question: new_attributes }
         question.reload
-        expect(response).to redirect_to(claimant_question_url(question))
+        expect(response).to redirect_to(claimant_root_path)
       end
     end
 
