@@ -4,9 +4,7 @@
     <div class="flex justify-between items-start gap-4">
       <div class="flex-1 min-w-0">
         <h3 class="text-lg font-semibold text-gray-900">
-          <%= link_to lawyer_question_path(question), class: "hover:text-indigo-600" do %>
-            <%= question.title.truncate(50) %>
-          <% end %>
+          <%= question.title.truncate(50) %>
         </h3>
         
         <div class="mt-2 flex flex-wrap gap-2">

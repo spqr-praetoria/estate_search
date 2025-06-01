@@ -10,9 +10,8 @@ Rails.application.routes.draw do
 
   namespace :lawyer do
     root "dashboard#index"
-    resources :questions, except: :index
-    resources :questions do
-      resources :answers, only: [ :new, :create, :show ]
+    resources :questions, only: :show do
+      resources :answers, only: [ :new, :create ]
     end
   end
 

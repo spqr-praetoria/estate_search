@@ -1,10 +1,5 @@
 class Lawyer::AnswersController < Lawyer::ApplicationController
   before_action :set_question, only: :new
-  before_action :set_answer, only: :show
-
-  def show
-    @title = "Your Answer"
-  end
 
   def new
     @answer = Answer.new
