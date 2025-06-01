@@ -1,12 +1,6 @@
 class Claimant::QuestionsController < Claimant::ApplicationController
-  before_action :set_question, only: %i[ show edit update destroy ]
+  before_action :set_question, only: %i[ edit update destroy ]
 
-  # GET /questions
-  def index
-    @questions = current_user.questions.eager_load(:answers).order(created_at: :desc)
-  end
-
-  # GET /questions/1
   def show
     @title = "Question & Answers"
 
@@ -17,16 +11,13 @@ class Claimant::QuestionsController < Claimant::ApplicationController
                         .find(params[:id])
   end
 
-  # GET /questions/new
   def new
     @question = Question.new
   end
 
-  # GET /questions/1/edit
   def edit
   end
 
-  # POST /questions
   def create
     @question = current_user.questions.new(question_params)
 
@@ -40,7 +31,6 @@ class Claimant::QuestionsController < Claimant::ApplicationController
     end
   end
 
-  # PATCH/PUT /questions/1
   def update
     if @question.update(question_params)
       respond_to do |format|
@@ -52,7 +42,6 @@ class Claimant::QuestionsController < Claimant::ApplicationController
     end
   end
 
-  # DELETE /questions/1
   def destroy
     @question.destroy!
 
@@ -63,13 +52,12 @@ class Claimant::QuestionsController < Claimant::ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_question
-      @question = Question.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def question_params
-      params.expect(question: [ :user_id, :title, :body, :category, :status ])
-    end
+  def set_question
+    @question = Question.find(params.expect(:id))
+  end
+
+  def question_params
+    params.expect(question: [ :user_id, :title, :body, :category, :status ])
+  end
 end

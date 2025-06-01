@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :payments
-  resources :answers
-
   root "home#index"
 
   devise_for :users
@@ -17,7 +14,8 @@ Rails.application.routes.draw do
 
   namespace :claimant do
     root "dashboard#index"
-    resources :questions
+    resources :questions, except: :index
+    resources :payments, only: :update
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

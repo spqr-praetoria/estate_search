@@ -32,7 +32,7 @@
       <div class="flex items-center gap-4">
         <% if answer.unpaid? && answer.payment.pending? %>
           <%= button_to "Pay £#{answer.proposed_fee}", 
-                      payment_path(answer.payment), 
+                      claimant_payment_path(answer.payment), 
                       method: :patch,
                       class: "btn btn-primary btn-sm",
                       data: { turbo_frame: dom_id(answer) } %>
