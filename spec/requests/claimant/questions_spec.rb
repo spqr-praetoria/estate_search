@@ -132,7 +132,7 @@ RSpec.describe "/claimant/questions", type: :request do
     it "redirects to the questions list" do
       question = create(:question, user: user)
       delete claimant_question_url(question)
-      expect(response).to redirect_to(claimant_questions_url)
+      expect(response).to redirect_to(claimant_root_url)
     end
   end
 end
