@@ -13,7 +13,7 @@ class Lawyer::AnswersController < Lawyer::ApplicationController
   def create
     @answer = current_user.answers.build(answer_params.merge(question_id: params[:question_id]))
 
-    if @answer.save
+    if AnswerCreationService.new(@answer).call
       respond_to do |format|
         format.html { redirect_to lawyer_root_path, notice: "Answer was successfully created." }
         format.turbo_stream
