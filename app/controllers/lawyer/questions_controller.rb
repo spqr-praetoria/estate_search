@@ -1,7 +1,7 @@
-class Claimant::QuestionsController < Claimant::ApplicationController
-  before_action :set_question, only: %i[ show edit update destroy ]
-
+class Lawyer::QuestionsController < Lawyer::ApplicationController
+  before_action :set_question, only: %i[ edit update destroy ]
   def show
+    @question = Question.find(params[:id])
   end
 
   def new

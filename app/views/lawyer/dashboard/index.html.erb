@@ -1,25 +1,17 @@
 <%= turbo_stream_from "lawyer_questions" %>
 
-<div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
-  <%= turbo_frame_tag "questions" do %>
-    <div class="overflow-x-auto w-full">
-      <table class="min-w-full divide-y divide-gray-300">
-        <thead>
-          <tr>
-            <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">ID</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Category</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Answers</th>
-            <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-6">
-              <span class="sr-only">Actions</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200" id="questions-list">
-          <%= render partial: "claimant/questions/question", collection: @questions %>
-        </tbody>
-      </table>
-    </div>
+<div class="sm:flex sm:items-center mt-8">
+  <div class="sm:flex-auto">
+    <p class="mt-2 text-sm text-gray-700">A list of all questions in the system including their title, category, and status.</p>
+  </div>
+</div>
+
+
+
+<div class="-mx-4 mt-10 sm:mx-0">
+  <%= turbo_frame_tag "lawyer_questions" do %>
+    <ul role="list" class="space-y-4" id="lawyer-questions-list">
+      <%= render partial: "lawyer/questions/question", collection: @questions %>
+    </ul>
   <% end %>
 </div>

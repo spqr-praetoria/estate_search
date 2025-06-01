@@ -21,4 +21,8 @@ class User < ApplicationRecord
     lawyer: 1,
     admin: 2
   }
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

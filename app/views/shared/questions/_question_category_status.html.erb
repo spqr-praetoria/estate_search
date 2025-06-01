@@ -1,0 +1,12 @@
+<% case question.category %>
+<% when 'general' %>
+  <div class="badge badge-neutral"><%= question.category.titleize %></div>
+<% when 'missing_assets' %>
+  <div class="badge badge-primary"><%= question.category.titleize %></div>
+<% when 'wills_and_probate' %>
+  <div class="badge badge-secondary"><%= question.category.titleize %></div>
+<% when 'legal_heirship' %>
+  <div class="badge badge-warning"><%= question.category.titleize %></div>
+<% else %>
+  <div class="badge badge-accent"><%= question.category.titleize %></div>
+<% end %>

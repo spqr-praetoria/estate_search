@@ -1,0 +1,8 @@
+<% case question.status %>
+<% when 'open' %>
+  <div class="badge badge-primary"><%= question.status.titleize %></div>
+<% when 'answered' %>
+  <div class="badge badge-warning"><%= question.status.titleize %></div>
+<% when 'closed' %>
+  <div class="badge badge-neutral"><%= question.status.titleize %></div>
+<% end %>

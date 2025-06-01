@@ -8,4 +8,8 @@ module ApplicationHelper
       link_to(path, **options, &block)
     end
   end
+
+  def format_pounds(amount)
+    number_to_currency(amount, unit: "£", precision: 2)
+  end
 end

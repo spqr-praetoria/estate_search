@@ -3,5 +3,8 @@
 <% end %>
 
 <%= turbo_stream.replace "question_#{@payment.answer.question.id}_status" do %>
-  <%= render partial: "claimant/questions/question_status", locals: { question: @payment.answer.question } %>
+  <div class="flex items-center gap-2">
+    <span class="text-sm font-medium text-gray-600">Status:</span>
+    <%= render partial: "shared/questions/question_status", locals: { question: @payment.answer.question } %>
+  </div>
 <% end %>

@@ -17,8 +17,8 @@ class Question < ApplicationRecord
   has_rich_text :body
 
   after_create_commit do
-    broadcast_prepend_to "questions", partial: "claimant/questions/question"
-    broadcast_prepend_to "lawyer_questions", partial: "lawyer/questions/question"
+    broadcast_prepend_to "questions", partial: "claimant/questions/question", target: "questions-list"
+    broadcast_prepend_to "lawyer_questions", partial: "lawyer/questions/question", target: "lawyer-questions-list"
   end
 
   after_update_commit do

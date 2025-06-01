@@ -31,7 +31,7 @@
 
       <div class="flex items-center gap-4">
         <% if answer.unpaid? && answer.payment.pending? %>
-          <%= button_to "Pay £#{answer.proposed_fee}", 
+          <%= button_to "Pay #{format_pounds(answer.proposed_fee)}", 
                       claimant_payment_path(answer.payment), 
                       method: :patch,
                       class: "btn btn-primary btn-sm",
@@ -42,7 +42,7 @@
             <div class="badge badge-neutral">Pending</div>
           <% when 'approved' %>
             <div class="text-lg font-semibold">
-              £<%= answer.proposed_fee %>
+              <%= format_pounds(answer.proposed_fee) %>
             </div>
             <div class="badge badge-success">Paid</div>
           <% end %>
