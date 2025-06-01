@@ -27,7 +27,7 @@ class Lawyer::QuestionsController < Lawyer::ApplicationController
   def update
     if @question.update(question_params)
       respond_to do |format|
-        format.html { redirect_to claimant_question_path(@question), notice: "Question was successfully updated.", status: :see_other }
+        format.html { redirect_to lawyer_root_path, notice: "Question was successfully updated.", status: :see_other }
         format.turbo_stream
       end
     else
@@ -39,7 +39,7 @@ class Lawyer::QuestionsController < Lawyer::ApplicationController
     @question.destroy!
 
     respond_to do |format|
-      format.html { redirect_to claimant_questions_path, notice: "Question was successfully destroyed.", status: :see_other }
+      format.html { redirect_to lawyer_root_path, notice: "Question was successfully destroyed.", status: :see_other }
       format.turbo_stream
     end
   end

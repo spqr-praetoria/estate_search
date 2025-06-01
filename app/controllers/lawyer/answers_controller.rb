@@ -1,6 +1,10 @@
 class Lawyer::AnswersController < Lawyer::ApplicationController
-  before_action :set_question, only: %i[ new create ]
-  before_action :set_answer, only: %i[ show ]
+  before_action :set_question, only: :new
+  before_action :set_answer, only: :show
+
+  def index
+    @answers = current_user.answers.includes(:question).order(created_at: :desc)
+  end
 
   def show
     @title = "Your Answer"
@@ -11,14 +15,22 @@ class Lawyer::AnswersController < Lawyer::ApplicationController
   end
 
   def create
-    @answer = @question.answers.create(answer_params)
-    redirect_to lawyer_question_path(@question)
+    @answer = current_user.answers.build(answer_params.merge(question_id: params[:question_id]))
+
+    if @answer.save
+      respond_to do |format|
+        format.html { redirect_to lawyer_root_path, notice: "Answer was successfully created." }
+        format.turbo_stream
+      end
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
 
   def answer_params
-    params.expect(answer: [ :body, :question_id, :lawyer_id, :proposed_fee ])
+    params.expect(answer: [ :lawyer_id, :body, :proposed_fee, :status ])
   end
 
   def set_question

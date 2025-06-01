@@ -5,7 +5,7 @@ class Claimant::PaymentsController < Claimant::ApplicationController
     if ApprovePaymentService.new(@payment).call
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @payment, notice: "Payment was successfully updated.", status: :see_other }
+        format.html { redirect_to claimant_root_path, notice: "Payment was successfully updated.", status: :see_other }
       end
     else
       render :edit, status: :unprocessable_entity

@@ -16,7 +16,7 @@ class Claimant::QuestionsController < Claimant::ApplicationController
 
     if @question.save
       respond_to do |format|
-        format.html { redirect_to claimant_question_path(@question), notice: "Question was successfully created." }
+        format.html { redirect_to claimant_root_path, notice: "Question was successfully created." }
         format.turbo_stream
       end
     else

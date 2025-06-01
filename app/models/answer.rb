@@ -5,7 +5,13 @@ class Answer < ApplicationRecord
   has_one :payment, dependent: :destroy
 
   validates :body, :proposed_fee, presence: true
-  validates :proposed_fee, numericality: { greater_than: 0 }
+
+  has_rich_text :body
+
+  # after_create_commit do
+  #   question.update(status: :answered)
+  #   Payment.create(user_id: lawyer_id, answer: self, amount: proposed_fee)
+  # end
 
   enum :status, {
     unpaid: 0,

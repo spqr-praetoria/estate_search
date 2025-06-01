@@ -6,6 +6,8 @@
   </div>
 </div>
 
+<%= turbo_frame_tag dom_id(Answer.new) %>
+
 <div class="-mx-4 mt-10 sm:mx-0">
   <%= turbo_frame_tag "lawyer_questions" do %>
     <ul role="list" class="space-y-4" id="lawyer-questions-list">

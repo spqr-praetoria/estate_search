@@ -175,21 +175,24 @@ answers = {
 questions.each do |category, category_questions|
   category_questions.each do |question_data|
     question = Question.create(
-      user: User.first,
+      user: User.claimant.sample,
       title: question_data[:title],
       body: question_data[:body],
-      category: category
+      category: category,
+      status: :answered
     )
 
     # Add 1-3 answers for each question
     rand(1..3).times do
       answer_data = answers[category].sample
-      question.answers.create(
+      answer = question.answers.create(
         lawyer: User.lawyer.sample,
         body: answer_data[:body],
         proposed_fee: answer_data[:proposed_fee],
         status: "unpaid"
       )
+
+      Payment.create(user: answer.lawyer, answer: answer, amount: answer.proposed_fee)
     end
   end
 end
@@ -204,7 +207,7 @@ Question.create(
 )
 
 Question.create(
-  user: User.first,
+  user: User.last,
   title: "Inheritance dispute with sibling over family business",
   body: "My father left his small business to both me and my brother in his will. However, my brother is claiming he should have full control because he worked in the business for 20 years while I pursued a different career. The business is worth approximately £250,000. What are my rights as a co-owner? Can he force me to sell my share?",
   category: Question.categories.keys.sample,
@@ -218,13 +221,3 @@ Question.create(
   category: Question.categories.keys.sample,
   status: :open
 )
-
-# 1 payment per answer
-Answer.all.each do |answer|
-  Payment.create(
-    user: User.find(answer.lawyer_id),
-    answer: answer,
-    amount: answer.proposed_fee,
-    status: 0
-  )
-end

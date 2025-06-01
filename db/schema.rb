@@ -52,7 +52,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_01_104859) do
   create_table "answers", force: :cascade do |t|
     t.integer "question_id", null: false
     t.integer "lawyer_id", null: false
-    t.text "body", null: false
+    t.text "body"
     t.integer "proposed_fee", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
