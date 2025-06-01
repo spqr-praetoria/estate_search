@@ -1,9 +1,9 @@
 {
-  "name": "playground",
+  "name": "estate_search",
   "version": "1.0.0",
   "description": "'none'",
   "main": "index.js",
-  "repository": "git@github.com:spqr-praetoria/playground.git",
+  "repository": "git@github.com:spqr-praetoria/estate_search.git",
   "author": "Benjamin Fowl <b.fowl87@gmail.com>",
   "license": "MIT",
   "devDependencies": {
