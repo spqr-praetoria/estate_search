@@ -1,24 +1,60 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Prerequisites
+- Ruby 3.4.2
+- Node v22.14.0
+- yarn 1.22.19
 
-Things you may want to cover:
+### Setup
+```
+git clone git@github.com:spqr-praetoria/estate_search.git
 
-* Ruby version
+bin/setup
+rails db:seed
 
-* System dependencies
+# If setup fails
+rails db:create
+rails db:migrate
+rails db:seed
 
-* Configuration
+# to start the server
+bin/dev
+```
 
-* Database creation
+Sign in
+### Claimants
+- claimaint@example.com
+- claimant2@example.com
 
-* Database initialization
+### Lawyers
+- lawyer1@example.com 
+- lawyer2@example.com
+- ... > lawyer10@example.com
 
-* How to run the test suite
+### Admin
+There is an admin but the page has nothing.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+### Tech stack
+- rspec (testing)
+- vite_rails (HRM)
+- action_policy
+- SQLite (For a cheap demo with no postges setup)
 
-* ...
+### Structure
+- I split everything out into their own sub folder
+  - Claimant
+  - Lawyer
+  - Admin
+
+  This is so that each can have their own views and I can creat policies according to the use role.
+
+### Hotwire
+- Using hotwire for dynamic events
+- Turbo streams for real time updates
+
+
+
+
+
+
