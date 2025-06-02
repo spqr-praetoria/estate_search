@@ -1,5 +1,13 @@
 # README
 
+Production
+[https://playground-white-thunder-762.fly.dev/](https://playground-white-thunder-762.fly.dev/)
+
+Explanation
+[Demo Video 1](https://www.loom.com/share/7a46802e9d184b829bcb9609974092ef)  
+[Demo Video 2](https://www.loom.com/share/0e4ea1522b6246b899d5f7e0bbcaccb6)
+
+
 ### Prerequisites
 - Ruby 3.4.2
 - Node v22.14.0
@@ -39,7 +47,7 @@ There is an admin but the page has nothing.
 - rspec (testing)
 - vite_rails (HRM)
 - action_policy
-- SQLite (For a cheap demo with no postges setup)
+- SQLite3 (For a cheap demo with no postges setup)
 
 ### Structure
 - I split everything out into their own sub folder
